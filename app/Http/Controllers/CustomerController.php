@@ -12,7 +12,7 @@ class CustomerController extends Controller
         $customer = Customer::create(array(
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->email,
+            'phone' => $request->phone,
             'source' => $token
         ));
 
