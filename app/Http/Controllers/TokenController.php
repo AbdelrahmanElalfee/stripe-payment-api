@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Stripe\Token;
+use Stripe\Stripe;
 
 class TokenController extends Controller
 {
     public function createStripeToken(Request $request)
     {
+        Stripe::setApiKey(config('services.stripe.secret'));
         try {
             $token = Token::create(array(
                 'card' => [

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Stripe\Price;
+use Stripe\Stripe;
 
 class PriceController extends Controller
 {
-    public function createStripePrice(Request $request, $id)
+    public function createStripePrice(Request $request)
     {
+        Stripe::setApiKey(config('services.stripe.secret'));
         try {
             $price = Price::create(array(
                 'unit_amount' => $request->amount,

@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Stripe\Customer;
-use Stripe\Token;
+use Stripe\Stripe;
 
 class CustomerController extends Controller
 {
-    public function createStripeCustomer(Request $request, $token)
+    public function createStripeCustomer(Request $request)
     {
+        Stripe::setApiKey(config('services.stripe.secret'));
         try {
             $customer = Customer::create(array(
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'source' => $token
+                'source' => $request->token
             ));
             return response()->json($customer);
         } catch (\Exception $ex) {

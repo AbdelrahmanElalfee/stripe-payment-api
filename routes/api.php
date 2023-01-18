@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\PriceController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\TokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +31,10 @@ Route::group([
     'prefix' => 'payment',
 ], function ($router) {
     Route::post('charge', [StripePaymentController::class, 'singleCharge']);
+    Route::post('customer', [CustomerController::class, 'createStripeCustomer']);
+    Route::post('plan', [PlanController::class, 'createStripePlan']);
+    Route::post('price', [PriceController::class, 'createStripePrice']);
+    Route::post('product', [ProductController::class, 'createStripeProduct']);
+    Route::post('subscription', [SubscriptionController::class, 'createStripeSubscription']);
+    Route::post('token', [TokenController::class, 'createStripeToken']);
 });

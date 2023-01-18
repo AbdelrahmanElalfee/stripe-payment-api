@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Session;
 use Stripe\Stripe;
-use Stripe\Customer;
 use Stripe\Charge;
-use Stripe\Token;
 
 class StripePaymentController extends Controller
 {

@@ -6,16 +6,18 @@ use Illuminate\Http\Request;
 use Stripe\Customer;
 use Stripe\Price;
 use Stripe\Subscription;
+use Stripe\Stripe;
 
 class SubscriptionController extends Controller
 {
-    public function createStripeSubscription(Request $request, Customer $customer, Price $price)
+    public function createStripeSubscription(Request $request)
     {
+        Stripe::setApiKey(config('services.stripe.secret'));
         try {
             $subscription = Subscription::create(array(
-                'customer' => $customer,
+                'customer' => $request->customer,
                 'items' => [
-                    ['price' => $price],
+                    ['price' => $request->price],
                 ],
             ));
             return response()->json($subscription);
