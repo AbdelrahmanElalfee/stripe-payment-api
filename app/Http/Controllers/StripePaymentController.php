@@ -12,22 +12,6 @@ use Stripe\Token;
 
 class StripePaymentController extends Controller
 {
-    /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function stripe()
-    {
-        $user = User::findOrFail(1);
-        $intent = $user->createSetupIntent();
-    }
-
-    /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function singleCharge(Request $request)
     {
         try {

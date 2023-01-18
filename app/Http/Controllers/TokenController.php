@@ -9,15 +9,18 @@ class TokenController extends Controller
 {
     public function createStripeToken(Request $request)
     {
-        $token = Token::create(array(
-            'card' => [
-                'number' => $request->number,
-                'exp_month' => $request->exp_month,
-                'exp_year' => $request->exp_year,
-                'cvc' => $request->cvc,
-            ],
-        ));
-
-        return $token;
+        try {
+            $token = Token::create(array(
+                'card' => [
+                    'number' => $request->number,
+                    'exp_month' => $request->exp_month,
+                    'exp_year' => $request->exp_year,
+                    'cvc' => $request->cvc,
+                ],
+            ));
+            return response()->json($token);
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
     }
 }
